@@ -5,7 +5,7 @@
 - As a user, you open the application "For now, You need to open the Location services manually" .
 It will start listening automatically to location services, and depending on your current speed, it will measure the time the vehicle takes to go from 10km/h to 30 km/h and vice versa.
 
-- **Third party integrations:
+- **Third party integrations:**
 
 1.	geolocator package to access location and get speed.
 2.	syncfusion_flutter_gauges package to show the speed on gauges.

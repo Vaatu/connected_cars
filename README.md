@@ -8,7 +8,6 @@ It will start listening automatically to location services, and depending on you
 - **Third party integrations:**
 
 1.	geolocator package to access location and get speed.
-2.	syncfusion_flutter_gauges package to show the speed on gauges.
 
 ![alt ](https://i.ibb.co/fqM9ZM7/Screenshot-1592737603.png)
 

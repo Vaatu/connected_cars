@@ -1,7 +1,5 @@
-import 'package:connectedcar/components/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -36,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     geolocator.getPositionStream(options).listen((position) {
       setState(() {
-
         this.speedInKph = (position.speed * 1.609344);
 
         if (speedInKph > 0 && speedInKph <= 10 && startSpeed == null) {
@@ -62,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
           downSpeedEnd = speedInKph;
           thirtyToTenDuration =
               DateTime.now().difference(thirtyToTenDateStart).inSeconds;
-          thirtyToTenText =DateTime.now().difference(thirtyToTenDateStart).inSeconds;
+          thirtyToTenText =
+              DateTime.now().difference(thirtyToTenDateStart).inSeconds;
           print('tenToThirtyDuration$tenToThirtyDuration');
           thirtyToTenDuration = null;
           downSpeedEnd = null;
@@ -84,123 +82,90 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SfRadialGauge(
-            title: GaugeTitle(
-                text: 'Speedometer',
-                textStyle: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold)),
-            axes: <RadialAxis>[
-              RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
-                GaugeRange(
-                    startValue: 0,
-                    endValue: 50,
-                    color: Colors.green,
-                    startWidth: 10,
-                    endWidth: 10),
-                GaugeRange(
-                    startValue: 50,
-                    endValue: 100,
-                    color: Colors.orange,
-                    startWidth: 10,
-                    endWidth: 10),
-                GaugeRange(
-                    startValue: 100,
-                    endValue: 150,
-                    color: Colors.red,
-                    startWidth: 10,
-                    endWidth: 10)
-              ], pointers: <GaugePointer>[
-                NeedlePointer(
-                    value: speedInKph == null
-                        ? 0
-                        : double.parse(speedInKph.toStringAsFixed(0)))
-              ], annotations: <GaugeAnnotation>[
-                GaugeAnnotation(
-                    widget: Container(
-                        child: Text(
-                            '${speedInKph == null ? 0 : speedInKph.toInt().toString()}',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold))),
-                    angle: 80,
-                    positionFactor: 0.5)
-              ])
-            ]),
+        Text(
+          'Current Speed',
+          style: TextStyle(fontSize: 36.0),
+        ),
         SizedBox(
           height: 36.0,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: <Widget>[
-            Expanded(
-              child: ReusableCard(
-                colour: Color(0xFF1D1E33),
-                cardChild: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        textBaseline: TextBaseline.alphabetic,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            '${tenToThirtyDuration == null ? '0' : '$tenToThirtyDuration'}',
-                            style: TextStyle(
-                                fontSize: 36, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 4.0,
-                          ),
-                          Text('sec')
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Text(
-                        'From 10 to 30 ',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                colour: Color(0xFF1D1E33),
-                cardChild: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        textBaseline: TextBaseline.alphabetic,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            '${thirtyToTenDuration == null && thirtyToTenText == null ? '0' : '$thirtyToTenText'}',
-                            style: TextStyle(
-                                fontSize: 36, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 4.0,
-                          ),
-                          Text('sec')
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Text(
-                        'From 10 to 30 ',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
+            Text('${speedInKph.round()}',
+                style: TextStyle(
+                    fontFamily: 'digitalNum', fontSize: 72.0, color: Colors.green,fontWeight: FontWeight.bold)),
+            Text(' kmh', style: TextStyle(fontSize: 18.0),)
           ],
+        ),
+
+        SizedBox(
+          height: 36.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    '${tenToThirtyDuration == null ? '0' : '$tenToThirtyDuration'}',
+                    style:
+                        TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold,fontFamily: 'digitalNum',color: Colors.green,),
+                  ),
+                  SizedBox(
+                    width: 4.0,
+                  ),
+                  Text('sec')
+                ],
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'From 10 to 30 ',
+                style: TextStyle(fontSize: 28.0),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 38.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                textBaseline: TextBaseline.alphabetic,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    '${thirtyToTenDuration == null && thirtyToTenText == null ? '0' : '$thirtyToTenText'}',
+                    style:
+                    TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold,fontFamily: 'digitalNum',color: Colors.green),
+                  ),
+                  SizedBox(
+                    width: 4.0,
+                  ),
+                  Text('sec')
+                ],
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'From 30 to 10 ',
+                style: TextStyle(fontSize: 28.0),
+              ),
+            ],
+          ),
         )
       ],
     );

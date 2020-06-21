@@ -1,9 +1,7 @@
 import 'package:connectedcar/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_core/core.dart';
 
 void main() {
-  SyncfusionLicense.registerLicense("NT8mJyc2IWhia31ifWN9ZmFoZHxiY3xhY2Fjc2JjaWdmaWFqcwMeaD42NzwgIzo3NiFiY2VjEzQ+Mjo/fTA8Pg==");
   runApp(MyApp());
 }
 
